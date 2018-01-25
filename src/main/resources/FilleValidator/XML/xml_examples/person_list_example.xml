@@ -1,0 +1,32 @@
+<PersonList>
+    <Persons>
+        <Name>Jan</Name>
+        <Surname>Kowalski</Surname>
+        <Pesel>12345123451</Pesel>
+        <Email>jan.kowalski@teno.lp</Email>
+    </Persons>
+    <Persons>
+        <Name>Jan</Name>
+        <Surname>Kowalski</Surname>
+        <Pesel>12345123451</Pesel>
+        <Email>jan.kowalski@teno.lp</Email>
+        <Car>
+            <Type>Cool</Type>
+            <VinNumber>123</VinNumber>
+            <RegistrationDate>2002-09-24</RegistrationDate>
+            <RegistrationPlate>FJ 22IWK</RegistrationPlate>
+        </Car>
+        <Car>
+            <Type>Cool</Type>
+            <VinNumber>123</VinNumber>
+            <RegistrationDate>2002-09-24</RegistrationDate>
+            <RegistrationPlate>FJ 22IWK</RegistrationPlate>
+        </Car>
+    </Persons>
+    <Persons>
+        <Name>Jan</Name>
+        <Surname>Kowalski</Surname>
+        <Pesel>12345123451</Pesel>
+        <Email>jan.kowalski@teno.lp</Email>
+    </Persons>
+</PersonList>

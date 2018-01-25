@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+            jxb:version="2.0">
+
+    <!--Musi być inaczej walidator nie widzi typu-->
+    <xsd:element name="PersonList" type="PersonList"/>
+    <xsd:element name="CarList" type="CarList"/>
+
+    <xsd:complexType name="PersonList">
+        <xsd:sequence>
+            <xsd:element name="Persons" type="Person" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="Person">
+        <xsd:sequence>
+            <xsd:element name="Name" type="xsd:string"/>
+            <xsd:element name="Surname" type="xsd:string"/>
+            <xsd:element name="Pesel" type="xsd:string"/>
+            <xsd:element name="Email" type="xsd:string"/>
+            <xsd:element name="Car" type="Car" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="Car">
+        <xsd:sequence>
+            <xsd:element name="Type" type="xsd:string"/>
+            <xsd:element name="VinNumber" type="xsd:string"/>
+            <xsd:element name="RegistrationDate" type="xsd:date"/>
+            <xsd:element name="RegistrationPlate" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="CarList">
+        <xsd:sequence>
+            <xsd:element name="Car" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>
