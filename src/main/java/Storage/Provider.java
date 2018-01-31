@@ -1,4 +1,4 @@
-package XMLProvider;
+package Storage;
 
 public interface Provider
 {
