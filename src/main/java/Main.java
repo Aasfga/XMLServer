@@ -11,16 +11,8 @@ import java.io.File;
 
 public class Main
 {
-    public static void main(String[] args) throws JAXBException, SAXException
+    public static void main(String[] args) throws Exception
     {
-//        JAXBContext jc = JAXBContext.newInstance( "SchemaClasses" );
-//        Unmarshaller u = jc.createUnmarshaller();
-//        SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-//        Schema schema = sf.newSchema(new File(Main.class.getResource("FilleValidator/XML/schema.xsd").getPath()));
-//        u.setSchema(schema);
-//        JAXBElement element = (JAXBElement) u.unmarshal( new File( Main.class.getResource("FileValidator/XML/xml_examples/person_list_example.xml").getPath()) );
-//        PersonList list = (PersonList) element.getValue();
-//        for(Person p : list.getPersons())
-//            System.out.println(p.getName());
+        new Server.Controller().start();
     }
 }
