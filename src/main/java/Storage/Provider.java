@@ -6,9 +6,9 @@ import java.util.Collection;
 
 public interface Provider
 {
-    Collection<FileInfo> getFileNames() throws IOException;
+    Collection<FileInfo> getFileNames() throws Exception;
 
-    void uploadFile(String filename, byte[] file) throws IOException, JAXBException;
+    void uploadFile(String filename, byte[] file) throws Exception;
 
-    byte[] downloadFile(FileInfo info) throws IOException;
+    byte[] downloadFile(FileInfo info) throws Exception;
 }

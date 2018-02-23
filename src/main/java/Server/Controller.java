@@ -11,7 +11,9 @@ public class Controller
     public void start() throws Exception
     {
         handler.addServlet(ResponseServer.class, "/list");
-        handler.addServlet(ResponseServer.class, "/*");
+        handler.addServlet(ResponseServer.class, "/get/*");
+        handler.addServlet(ResponseServer.class, "/put/*");
+
         server.start();
     }
 }
