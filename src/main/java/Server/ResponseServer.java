@@ -3,9 +3,7 @@ package Server;
 import Storage.ExampleProvider;
 import Storage.FileInfo;
 import Storage.Provider;
-import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import org.eclipse.jetty.http.HttpStatus;
-import sun.misc.IOUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +18,7 @@ public class ResponseServer extends HttpServlet
 {
 
     //Server is based on HTTD protocol
-    Provider provider = new ExampleProvider();
+    static Provider provider = new ExampleProvider();
 
     {
         try
@@ -128,13 +126,5 @@ public class ResponseServer extends HttpServlet
             System.out.println(String.format("Error message of type %s. Msg: %s", e.getClass().toString(), e.getMessage()));
             resp.setStatus(400);
         }
-    }
-
-    public static void main(String[] args)
-    {
-//        GregorianCalendar date = getDate("2014:1:2:8:9:10");
-//        System.out.println(String.format("%d/%d/%d %d/%d/%d", date.get(Calendar.DATE),
-//                                         date.get(Calendar.MONTH), date.get(Calendar.YEAR), date.get(Calendar.HOUR_OF_DAY),
-//                                         date.get(Calendar.MINUTE), date.get(Calendar.SECOND)));
     }
 }
