@@ -1,18 +1,26 @@
-import org.xml.sax.SAXException;
+import HttpServer.Controller;
 
-import javax.xml.XMLConstants;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
-import java.io.File;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Main
 {
+    private static Logger appLogger = Logger.getLogger("AppLogger");
+
+    static
+    {
+        Level level = Level.ALL;
+        appLogger.setUseParentHandlers(false);
+        ConsoleHandler handler = new ConsoleHandler();
+        handler.setLevel(level);
+        appLogger.setLevel(level);
+        appLogger.addHandler(handler);
+    }
+
     public static void main(String[] args) throws Exception
     {
-        new Server.Controller().start();
+        Controller.setLogger(appLogger);
+        Controller.start();
     }
 }

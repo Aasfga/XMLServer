@@ -6,18 +6,20 @@ import java.util.*;
 
 public class ExampleProvider implements Provider
 {
-    private static final int MIN_DAY = 10;
-    private static final int MAX_DAY = 100;
-    private static final int MIN_HOUR = 0;
-    private static final int MAX_HOUR = 24;
-    private static final int MIN_SIZE = 1;
-    private static final int MAX_SIZE = 1;
-    private static final int MIN_DUP = 1;
-    private static final int MAX_DUP = 1;
-    private static final int MIN_LEN = 5;
-    private static final int MAX_LEN = 10;
-    private static final int MIN_FSIZE = 100;
-    private static final int MAX_FSIZE = 300;
+    private static final int MIN_DAY    = 10;
+    private static final int MAX_DAY    = 100;
+    private static final int MIN_HOUR   = 0;
+    private static final int MAX_HOUR   = 24;
+    private static final int MIN_SIZE   = 10;
+    private static final int MAX_SIZE   = 15;
+    private static final int MIN_DUP    = 1;
+    private static final int MAX_DUP    = 1;
+    private static final int MIN_LEN    = 5;
+    private static final int MAX_LEN    = 10;
+    private static final int MIN_FSIZE  = 100;
+    private static final int MAX_FSIZE  = 300;
+    private static final int P_BASE     = 100;
+    private static final int P_VAL      = 20;
 
     private Map<FileInfo, byte[]> files = new TreeMap<>();
     static private Random random = new Random();
@@ -71,7 +73,7 @@ public class ExampleProvider implements Provider
     @Override
     public void uploadFile(String filename, byte[] file) throws IOException
     {
-        if(random.nextInt(10) < 2)
+        if(random.nextInt(P_BASE) > P_VAL)
             throw new IOException("Connection error. Try again");
         if(filename == null)
             throw new NullPointerException();
@@ -94,7 +96,7 @@ public class ExampleProvider implements Provider
     @Override
     public byte[] downloadFile(FileInfo info) throws IOException
     {
-        if(random.nextInt(10) < 2)
+        if(random.nextInt(P_BASE) > P_VAL)
             throw new IOException("Connection error. Try again");
         if(info == null)
             throw new NullPointerException();
