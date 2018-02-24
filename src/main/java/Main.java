@@ -1,4 +1,5 @@
 import HttpServer.Controller;
+import Storage.DataBase;
 
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
@@ -21,6 +22,7 @@ public class Main
     public static void main(String[] args) throws Exception
     {
         Controller.setLogger(appLogger);
+        DataBase.setLogger(appLogger);
         Controller.start();
     }
 }

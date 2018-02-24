@@ -33,7 +33,7 @@ public class XMLValidator implements Validator
         JAXBContext jc = JAXBContext.newInstance(XMLValidator.class, ObjectFactory.class);
         Unmarshaller unmarshaller = jc.createUnmarshaller();
         SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-        Schema schema = sf.newSchema(new File(getClass().getResource("schema.xsd").getPath()));
+        Schema schema = sf.newSchema(new File("schema.xsd"));
         unmarshaller.setSchema(schema);
         unmarshaller.unmarshal(xml);
     }

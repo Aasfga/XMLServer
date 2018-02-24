@@ -1,5 +1,7 @@
 package Storage;
 
+import FileValidator.XML.XMLValidator;
+import HttpServer.Controller;
 import com.google.common.hash.HashFunction;
 import com.google.common.hash.Hashing;
 
@@ -7,14 +9,27 @@ import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.sql.*;
 import java.util.*;
+import java.util.logging.Logger;
 
-public class DataBase implements Provider{
+public class DataBase implements Provider
+{
+    private static Logger logger = Logger.getAnonymousLogger();
+
+    public static void setLogger(Logger logger)
+    {
+        DataBase.logger = logger;
+    }
+
     final private String databaseURL = "jdbc:sqlite:xmlFiles.db";
+
     HashFunction sha256 = Hashing.sha256();
+
     private Connection connection = DriverManager.getConnection(databaseURL);
 
+    XMLValidator validator = new XMLValidator();
 
-    public DataBase() throws SQLException{
+    public DataBase() throws SQLException
+    {
         Statement statement = connection.createStatement();
         String query = "CREATE TABLE IF NOT EXISTS db (filename text, _date INTEGER , " +
                 "file blob, SHA text, PRIMARY KEY(filename, _date))";
@@ -22,7 +37,8 @@ public class DataBase implements Provider{
     }
 
     @Override
-    public Collection<FileInfo> getFileNames() throws IOException {
+    public Collection<FileInfo> getFileNames() throws Exception
+    {
         String query = "SELECT filename, _date, sha FROM db";
         Set<FileInfo> set = new TreeSet<>();
 
@@ -36,18 +52,20 @@ public class DataBase implements Provider{
                 _date.setTimeInMillis(epoch);
                 set.add(new FileInfo(filename, _date));
             }
-        }catch(SQLException e) {
-            System.out.println(String.format("getFileNames() error: %s", e.getMessage()));
-            // zrob tutaj cos fajnego
+        }
+        catch(SQLException e)
+        {
+            logger.warning(String.format("getFileNames() error: %s", e.getMessage()));
         }
 
         return set;
     }
 
     @Override
-    public void uploadFile(String filename, byte[] file) throws IOException, JAXBException {
-
+    public void uploadFile(String filename, byte[] file) throws Exception
+    {
         long _date = (new GregorianCalendar()).getTimeInMillis();
+        validator.validate(file);
         String query = "INSERT INTO db VALUES (?, ?, ?, ?)";
         System.out.println(query);
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -57,8 +75,9 @@ public class DataBase implements Provider{
             stmt.setString(4,sha256.hashBytes(file).toString());
             System.out.println(sha256.hashBytes(file).toString());
             stmt.executeUpdate();
-        } catch(SQLException e) {
-            System.out.println(String.format("uploadFile Error: %s", e.getMessage()));
+        } catch(SQLException e)
+        {
+            logger.warning(String.format("uploadFile Error: %s", e.getMessage()));
         }
     }
 
@@ -74,8 +93,7 @@ public class DataBase implements Provider{
             byte[] bytes = rs.getBytes("file");
             return bytes;
         } catch(SQLException e) {
-            System.out.println(String.format("downloadFile error %s", e.getMessage()));
-            // nie rob nic fajnego
+            logger.warning(String.format("downloadFile error %s", e.getMessage()));
         }
         return null;
     }
