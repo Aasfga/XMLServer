@@ -16,3 +16,25 @@ dependencies {
     compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.21.0.1'
     compile group: 'com.google.guava', name: 'guava', version: '23.6-jre'
 }
+
+sourceSets {
+    main {
+        output.resourcesDir = "build/classes/java/main"
+        java {
+            srcDirs = ["src/main/java"]
+        }
+        resources {
+            srcDirs = ["src/main/resources"]
+        }
+    }
+}
+
+jar {
+    manifest {
+        attributes(
+                "Implementation-Version": "1.0",
+                "Main-Class": "Main"
+        )
+    }
+}
+

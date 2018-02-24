@@ -24,7 +24,19 @@ public class DataBase implements Provider
 
     HashFunction sha256 = Hashing.sha256();
 
-    private Connection connection = DriverManager.getConnection(databaseURL);
+    private Connection connection;
+    {
+        try
+        {
+            Class.forName("org.sqlite.JDBC");
+            connection = DriverManager.getConnection(databaseURL);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
+    }
 
     XMLValidator validator = new XMLValidator();
 
@@ -67,7 +79,6 @@ public class DataBase implements Provider
         long _date = (new GregorianCalendar()).getTimeInMillis();
         validator.validate(file);
         String query = "INSERT INTO db VALUES (?, ?, ?, ?)";
-        System.out.println(query);
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, filename);
             stmt.setLong(2, _date);

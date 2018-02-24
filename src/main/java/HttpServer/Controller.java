@@ -37,7 +37,7 @@ public class Controller extends HttpServlet
         }
         catch(SQLException e)
         {
-            logger.warning("Database is broken");
+            e.printStackTrace();
         }
     }
 
