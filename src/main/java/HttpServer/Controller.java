@@ -1,5 +1,6 @@
 package HttpServer;
 
+import Storage.DataBase;
 import Storage.ExampleProvider;
 import Storage.FileInfo;
 import Storage.Provider;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -25,7 +27,19 @@ public class Controller extends HttpServlet
         Controller.logger = logger;
     }
 
-    static Provider provider = new ExampleProvider();
+    static Provider provider;
+
+    static
+    {
+        try
+        {
+            provider = new DataBase();
+        }
+        catch(SQLException e)
+        {
+            logger.warning("Database is broken");
+        }
+    }
 
     private static GregorianCalendar getDate(String stringDate)
     {
