@@ -13,4 +13,6 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile group: 'org.eclipse.jetty', name: 'jetty-server', version: '9.4.8.v20171121'
     compile group: 'org.eclipse.jetty', name: 'jetty-servlet', version: '9.4.8.v20171121'
+    compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.21.0.1'
+    compile group: 'com.google.guava', name: 'guava', version: '23.6-jre'
 }
