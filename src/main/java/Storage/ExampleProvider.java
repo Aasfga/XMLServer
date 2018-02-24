@@ -73,8 +73,8 @@ public class ExampleProvider implements Provider
     @Override
     public void uploadFile(String filename, byte[] file) throws IOException
     {
-        if(random.nextInt(P_BASE) > P_VAL)
-            throw new IOException("Connection error. Try again");
+        if(random.nextInt(P_BASE) < P_VAL)
+            throw new IOException("Random connection error. Try again");
         if(filename == null)
             throw new NullPointerException();
         Collection<FileInfo> keys = files.keySet();
@@ -96,8 +96,8 @@ public class ExampleProvider implements Provider
     @Override
     public byte[] downloadFile(FileInfo info) throws IOException
     {
-        if(random.nextInt(P_BASE) > P_VAL)
-            throw new IOException("Connection error. Try again");
+        if(random.nextInt(P_BASE) < P_VAL)
+            throw new IOException("Random Connection error. Try again");
         if(info == null)
             throw new NullPointerException();
         return files.getOrDefault(info, null);
